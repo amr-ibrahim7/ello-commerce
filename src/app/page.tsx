@@ -1,3 +1,6 @@
+// import { FeaturedDealsSection } from "@/components/FeaturedDealsSection";
+import FeaturedDealsSection from "@/components/FeaturedDealsSection";
+import { FeaturedProductsSection } from "@/components/FeaturedProductsSection";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { ShoppingSection } from "@/components/ShoppingSection";
@@ -9,6 +12,8 @@ export default function Home() {
       <Header />
       <HeroSection />
       <ShoppingSection />
+      <FeaturedProductsSection />
+      <FeaturedDealsSection />
     </main>
   );
 }
