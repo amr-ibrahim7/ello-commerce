@@ -1,8 +1,22 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
+  const [lineFullWidth, setLineFullWidth] = useState(false);
+
+ useEffect(() => {
+  const timeout = setTimeout(() => {
+    requestAnimationFrame(() => {
+      setLineFullWidth(true);
+    });
+  }, 500);
+
+  return () => clearTimeout(timeout);
+}, []);
+
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <video
@@ -16,36 +30,45 @@ export function HeroSection() {
         Your browser does not support the video tag.
       </video>
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-0" />
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-        <h1 className="text-6xl md:text-8xl font-light mb-6 leading-tight">
-          No Place Like Home
-        </h1>
-        
-        <div className="w-24 h-px bg-white/60 mx-auto mb-8" />
-        
-        <p className="text-xl md:text-2xl font-light mb-12 opacity-90">
-         Get Best Device With Lowest Price
-        </p>
-        
-        <Button 
-          size="lg" 
-          className="bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 backdrop-blur-sm transition-all duration-300 glow-effect dark:glow-effect px-8 py-3 rounded-full"
-        >
-          Discover more
-        </Button>
-      </div>
-      
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 z-10">
-        <div className="animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse" />
+
+      <div className="relative z-20 text-white w-full px-8 max-w-7xl mx-auto">
+        <div className="flex flex-col items-start">
+
+          <h1 className="text-[80px] md:text-[120px] font-light mb-6 leading-none tracking-tight">
+            Power Up Your Tech
+          </h1>
+
+          <div
+            className={`h-px bg-white transition-all duration-[2000ms] ease-in-out ${
+              lineFullWidth ? "w-full" : "w-0"
+            }`}
+          />
+          
+          <div className="w-full flex justify-between items-center mt-6 flex-wrap gap-y-4">
+            <p className="text-xl md:text-2xl font-light opacity-90">
+              Premium electronics. Unbeatable prices. Shop now.
+            </p>
+            <div className="relative inline-block">
+              <Button
+                size="lg"
+                className="group relative bg-white/10 hover:bg-white/15 text-white border border-white/30 hover:border-white/50 backdrop-blur-sm transition-all duration-500 px-10 py-4 rounded-full text-lg font-light overflow-hidden"
+              >
+                <div className="relative z-10">
+                  <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full group-hover:opacity-0">
+                  Start Shopping
+                  </span>
+                  <span className="absolute inset-0 inline-block transition-transform duration-500 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                  Start Shopping
+                  </span>
+                </div>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
