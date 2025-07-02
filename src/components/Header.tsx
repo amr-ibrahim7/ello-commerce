@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Search, User, ShoppingBag, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,26 +15,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/app/theme-toggle";
+import Link from "next/link";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-useEffect(() => {
-  const handleScroll = () => {
-    requestAnimationFrame(() => {
-      setIsScrolled(window.scrollY > 10);
-    });
-  };
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 10);
+      });
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border dark:bg-background/80 dark:border-white/10"
+          ? "bg-muted text-muted-foreground border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -42,7 +43,7 @@ useEffect(() => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <h1 className="text-2xl font-normal text-foreground tracking-wide dark:text-white">
-              ello <span className="font-bold">noric</span>
+              Ello <span className="font-bold">Noriic</span>
             </h1>
           </div>
 
@@ -51,53 +52,72 @@ useEffect(() => {
             <NavigationMenuList className="bg-card/50 backdrop-blur-md rounded-full px-8 py-3 border border-border dark:bg-card/30 dark:border-white/10">
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-6 py-2 text-foreground/90 hover:text-foreground font-normal transition-all duration-300 hover:bg-accent/50 rounded-full dark:text-white/90 dark:hover:text-white dark:hover:bg-white/10">
-                Home
+                  <Link href="/">Home</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-6 py-2 text-foreground/90 hover:text-foreground font-normal transition-all duration-300 hover:bg-accent/50 rounded-full dark:text-white/90 dark:hover:text-white dark:hover:bg-white/10">
-                  Shop
+                  <Link href="/shop">Shop</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-6 py-2 text-foreground/90 hover:text-foreground font-normal transition-all duration-300 hover:bg-accent/50 rounded-full dark:text-white/90 dark:hover:text-white dark:hover:bg-white/10">
-                  Brands
+                  <Link href="/brands">Brands</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink className="px-6 py-2 text-foreground/90 hover:text-foreground font-normal transition-all duration-300 hover:bg-accent/50 rounded-full dark:text-white/90 dark:hover:text-white dark:hover:bg-white/10">
-                   Contact Us
+                  <Link href="/contactUs">Contact Us</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
-
           <div className="flex items-center space-x-2">
-
             <div className="hidden md:flex items-center space-x-2 bg-card/50 backdrop-blur-md rounded-full px-4 py-3 border border-border dark:bg-card/30 dark:border-white/10">
-              <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10"
+              >
                 <Search className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10"
+              >
                 <User className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10"
+              >
                 <ShoppingBag className="h-5 w-5" />
               </Button>
             </div>
 
-        
             <ThemeToggle />
 
             {/* Mobile Menu */}
-            <DropdownMenu open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <DropdownMenu
+              open={isMobileMenuOpen}
+              onOpenChange={setIsMobileMenuOpen}
+            >
               <DropdownMenuTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full dark:text-white/80 dark:hover:text-white dark:hover:bg-white/10"
+                >
                   <Menu className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-popover/95 backdrop-blur-md border border-border dark:bg-card/95 dark:border-white/10">
+              <DropdownMenuContent
+                align="end"
+                className="w-56 bg-popover/95 backdrop-blur-md border border-border dark:bg-card/95 dark:border-white/10"
+              >
                 <DropdownMenuItem className="cursor-pointer hover:bg-accent focus:bg-accent dark:hover:bg-white/10 dark:focus:bg-white/10">
                   Home
                 </DropdownMenuItem>
