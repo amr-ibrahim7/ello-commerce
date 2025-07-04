@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Shop", path: "/shop" },
+  { name: "Shop", path: "/products" },
   { name: "Brands", path: "/brands" },
   { name: "Contact Us", path: "/contactUs" },
 ];

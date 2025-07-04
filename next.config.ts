@@ -7,7 +7,7 @@ import type { NextConfig } from "next";
 // export default nextConfig;
 const nextConfig: NextConfig = {
   images: {
-    domains: ['images.pexels.com', 'images.unsplash.com'],
+    domains: ['images.pexels.com', 'images.unsplash.com', 'res.cloudinary.com'],
   },
 }
 
