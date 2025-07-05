@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Header } from "@/components/Header";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AuthContextProvider from "@/context/AuthContext";
+import TanstackProvider from "@/providers/TanstackProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,11 +19,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-        </ThemeProvider>
-        <Footer />
+        <TanstackProvider>
+          <AuthContextProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Header />
+              <main className="min-h-screen">{children}</main>
+            </ThemeProvider>
+            <Footer />
+          </AuthContextProvider>
+        </TanstackProvider>
       </body>
     </html>
   );
