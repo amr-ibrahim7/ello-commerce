@@ -39,7 +39,7 @@ export default async function ShopDetailPage({ params }: ProductPageProps) {
                   Product Not Found
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Sorry, we couldnt find the product youre looking for.
+                  Sorry, we couldn&apos;t find the product you&apos;re looking for.
                   It might have been removed, renamed, or is temporarily unavailable.
                 </p>
               </div>
@@ -50,7 +50,7 @@ export default async function ShopDetailPage({ params }: ProductPageProps) {
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li>• Check if the product URL is correct</li>
                   <li>• Browse our categories to find similar products</li>
-                  <li>• Use the search bar to find what youre looking for</li>
+                  <li>• Use the search bar to find what you&apos;re looking for</li>
                   <li>• Contact us if you think this is an error</li>
                 </ul>
               </div>

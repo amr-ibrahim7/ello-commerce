@@ -60,7 +60,7 @@ export default function Footer() {
 
 
   return (
-    <footer className="bg-muted text-muted-foreground py-10 mt-16 border-t">
+    <footer className="bg-muted text-muted-foreground py-10 border-t">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">

@@ -1,5 +1,5 @@
 "use client";
-import { Search, User, ShoppingBag, Menu } from "lucide-react";
+import { Search, User, ShoppingBag, Menu, LogOut, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -12,6 +12,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/app/theme-toggle";
@@ -95,24 +96,66 @@ export default function HeaderClient({ session }: HeaderClientProps) {
                 <Search className="h-5 w-5" />
               </Button>
               
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full"
-                title={session?.user?.name || "Guest"}
-              >
-                {session?.user?.image ? (
-                  <Image 
-                    src={session.user.image} 
-                    alt={session.user.name || "User"}
-                    width={20}
-                    height={20}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <User className="h-5 w-5" />
-                )}
-              </Button>
+              {/* User Dropdown Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-foreground/80 hover:text-foreground hover:bg-accent rounded-full"
+                    title={session?.user?.name || "Guest"}
+                  >
+                    {session?.user?.image ? (
+                      <Image 
+                        src={session.user.image} 
+                        alt={session.user.name || "User"}
+                        width={20}
+                        height={20}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <User className="h-5 w-5" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 bg-popover/95 backdrop-blur-md border border-border"
+                >
+                  {session ? (
+                    // User is logged in
+                    <>
+                      <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                        <Link href="/profile">
+                          <UserCircle className="mr-2 h-4 w-4" />
+                          Profile
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="cursor-pointer hover:bg-accent focus:bg-accent text-red-600">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Logout
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    // User is not logged in
+                    <>
+                      <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                        <Link href="/auth/login">
+                          <User className="mr-2 h-4 w-4" />
+                          Login
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                        <Link href="/auth/register">
+                          <UserCircle className="mr-2 h-4 w-4" />
+                          Sign Up
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
               
               <Button
                 variant="ghost"
@@ -163,10 +206,38 @@ export default function HeaderClient({ session }: HeaderClientProps) {
                   <Search className="mr-2 h-4 w-4" />
                   Search
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-accent focus:bg-accent">
-                  <User className="mr-2 h-4 w-4" />
-                  {session ? session.user.name : "Login"}
-                </DropdownMenuItem>
+                
+                {/* Mobile User Menu */}
+                {session ? (
+                  <>
+                    <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                      <Link href="/profile">
+                        <UserCircle className="mr-2 h-4 w-4" />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-accent focus:bg-accent text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                      <Link href="/auth/login">
+                        <User className="mr-2 h-4 w-4" />
+                        Login
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer hover:bg-accent focus:bg-accent">
+                      <Link href="/auth/register">
+                        <UserCircle className="mr-2 h-4 w-4" />
+                        Sign Up
+                      </Link>
+                    </DropdownMenuItem>
+                  </>
+                )}
+                
                 <DropdownMenuItem className="cursor-pointer hover:bg-accent focus:bg-accent">
                   <ShoppingBag className="mr-2 h-4 w-4" />
                   Cart
